@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <h2>Search Word: {{ word }}</h2>
+    <h2>Occurrences: {{ results[0] }}</h2> 
+    <hr>
+    {% for result in results[1:] %}
+
+
+
+   
+
+            <input type="hidden" name="word" value="{{ word }}">
+            <h2><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h2>
+            <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
+	    Arabic:<label for="arabic-checkbox" style="color: #e69900;"> <strong>{{ result.Arabic }}</strong></label><br>
+	    <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
+            Urdu:<label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
+
+	    <input type="checkbox" name="selected_data" value="wbw_urdu" id="wbw_urdu-checkbox">
+	    <label for="wbw_urdu-checkbox">
+   	    Urdu WBW:{% set segments = result.Wbw_Urdu.split('|') %}
+    	    {% for segment in segments %}
+        	{% if loop.index % 2 == 0 %}
+                    <span style="color: #4dc3ff;">{{ segment }}</span>
+                {% else %}
+                    <span style="color: #0040ff;">{{ segment }}</span>
+                {% endif %}
+            {% if not loop.last %}|{% endif %}
+            {% endfor %}
+	    </label><br>
+
+	    <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
+	    English:<label for="eng-checkbox" style="color:  #b300b3;">English: {{ result.Eng }}</label><br>
+
+		<input type="checkbox" name="selected_data" value="wbw_eng" id="wbw_eng-checkbox">
+	<label for="wbw_eng-checkbox">
+   	 Eng WBW:{% set segments = result.Wbw_Eng.split('|') %}
+    	{% for segment in segments %}
+        	{% if loop.index % 2 == 0 %}
+            <span style="color: #ff4dff;">{{ segment }}</span>
+        {% else %}
+            <span style="color:  #b300b3;">{{ segment }}</span>
+        {% endif %}
+        {% if not loop.last %}|{% endif %}
+    {% endfor %}
+	</label><br>
+
+            <input type="checkbox" name="selected_data" value="tafseer" id="tafseer-checkbox">
+            Tafseer:<label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
+
+ 
+        </form>
+        <hr>
+    {% endfor %}
+</body>
+</html>
