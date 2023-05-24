@@ -152,7 +152,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def search_page():
-    return render_template('search_page.html')
+    return render_template('index.html')
 
 @app.route('/search', methods=['GET'])
 @app.route('/search/<string:search_word>/<string:language>', methods=['GET'])
