@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello World</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+<head>
+    <title>Search Page</title>
+</head>
+<body>
+    <form action="/search?language={{ language }}&word={{ word }}" method="get">
+        <label for="language">Select Language:</label>
+        <select name="language" id="language">
+            <option value="arabic">Arabic</option>
+            <option value="urdu">Urdu</option>
+            <option value="eng">English</option>
+        </select>
+        <br><br>
+        <label for="word">Enter Word:</label>
+        <input type="text" id="word" name="word">
+        <br><br>
+        <input type="submit" value="Search">
+    </form>
+</body>
 </html>
