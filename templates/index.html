@@ -2,8 +2,14 @@
 <html>
 <head>
     <title>Search Page</title>
+    <style>
+        h1 {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
+    <h1>Holy Quran Search Engine</h1>
     <form action="/search?language={{ language }}&word={{ word }}" method="get">
         <label for="language">Select Language:</label>
         <select name="language" id="language">
