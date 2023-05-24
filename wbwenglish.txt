@@ -1,16 +1,6 @@
    
    1  •     1
-1:1  
-بِسۡمِ
-In (the) name
-ٱللَّهِ
-(of) Allah
-ٱلرَّحۡمَٰنِ
-the Most Gracious
-ٱلرَّحِيمِ
-the Most Merciful
-١
-1:2  
+1:1    
 ٱلۡحَمۡدُ
 All praises and thanks
 لِلَّهِ
@@ -20,13 +10,13 @@ the Lord
 ٱلۡعَٰلَمِينَ
 of the universe
 ٢
-1:3  
+1:2  
 ٱلرَّحۡمَٰنِ
 The Most Gracious
 ٱلرَّحِيمِ
 the Most Merciful
 ٣
-1:4  
+1:3  
 مَٰلِكِ
 (The) Master
 يَوۡمِ
@@ -34,7 +24,7 @@ the Most Merciful
 ٱلدِّينِ
 (of the) Judgment
 ٤
-1:5  
+1:4  
 إِيَّاكَ
 You Alone
 نَعۡبُدُ
@@ -44,7 +34,7 @@ and You Alone
 نَسۡتَعِينُ
 we ask for help
 ٥
-1:6  
+1:5  
 ٱهۡدِنَا
 Guide us
 ٱلصِّرَٰطَ
@@ -52,7 +42,7 @@ Guide us
 ٱلۡمُسۡتَقِيمَ
 the straight
 ٦
-1:7  
+1:6  
 صِرَٰطَ
 (The) path
 ٱلَّذِينَ
@@ -61,6 +51,7 @@ the straight
 You have bestowed (Your) Favors
 عَلَيۡهِمۡ
 on them
+1:7
 غَيۡرِ
 not (of)
 ٱلۡمَغۡضُوبِ
