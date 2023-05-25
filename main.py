@@ -197,8 +197,10 @@ def search(search_word=None, language=None):
                     "Tafseer": tafseer,
                 }   
                 results.append(result)
+                c1=res.get(a1)
+                c2=c1.count(search_word)
                 count += 1
-                c += 1
+                c += c2
         results.insert(0, c)
 
         if count < 1:
@@ -236,8 +238,10 @@ def search(search_word=None, language=None):
                     "Tafseer": tafseer,
                 }
                 results.append(result)
+                c1=res2.get(a1)
+                c2=c1.count(search_word)
                 count += 1
-                c += 1
+                c += c2
         results.insert(0, c)
 
         if count < 1:
@@ -274,8 +278,10 @@ def search(search_word=None, language=None):
                     "Tafseer": tafseer,
                 }
                 results.append(result)
+                c1=res1.get(a1)
+                c2=c1.count(search_word)
                 count += 1
-                c += 1
+                c += c2
         results.insert(0, c)
 
         if count < 1:
