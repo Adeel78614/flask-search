@@ -39,6 +39,7 @@
         .form-row label {
             color: #333;
             font-size: 16px;
+            font-weight: bold;
             margin-right: 10px;
             width: 140px;
             text-align: right;
@@ -72,7 +73,7 @@
     <h1>Holy Quran Search Engine</h1>
     <form action="/search?language={{ language }}&word={{ word }}" method="get">
         <div class="form-row">
-            <label for="language">Select Language:</label>
+            <label for="language"><strong>Select Language:</strong></label>
             <select name="language" id="language">
                 <option value="arabic">Arabic</option>
                 <option value="urdu">Urdu</option>
@@ -80,7 +81,7 @@
             </select>
         </div>
         <div class="form-row">
-            <label for="word">Enter Word:</label>
+            <label for="word"><strong>Enter Word:</strong></label>
             <input type="text" id="word" name="word">
         </div>
         <input type="submit" value="Search">
