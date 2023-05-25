@@ -2,49 +2,12 @@
 <html>
 <head>
     <title>Search Results</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f1f1f1;
-        }
-
-        h1 {
-            color: #336699;
-            font-family: "Arial", sans-serif;
-            font-size: 32px;
-            margin-bottom: 30px;
-        }
-
-        h2.search-results-heading {
-            color: #336699;
-            text-align: center;
-        }
-
-        h2.search-word {
-            color: green;
-        }
-
-        h2.occurrences {
-            color: purple;
-        }
-
-        h2.percentage {
-            color: red;
-        }
-
-        /* Rest of your CSS styles */
-    </style>
 </head>
 <body>
-    <h2 class="search-results-heading">Search Results</h2>
-    <h2 class="search-word">Search Word: {{ word }}</h2>
-    <h2 class="occurrences">Occurrences: {{ results[0] }}</h2>
-    <h2 class="percentage">% of Holy Quran covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
+    <h1>Search Results</h1>
+    <h2>Search Word: {{ word }}</h2>
+    <h2>Occurrences: {{ results[0] }}</h2>
+    <h2>% of Holy Quran covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
     <hr>
     {% for result in results[1:] %}
         <form>
