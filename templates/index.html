@@ -12,30 +12,49 @@
             margin: 0;
         }
 
+        h1 {
+            color: blue;
+            font-family: "Arial", sans-serif;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        label, input, select, input[type="submit"] {
+        .form-group {
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100px;
         }
     </style>
 </head>
 <body>
     <h1>Holy Quran Search Engine</h1>
     <form action="/search?language={{ language }}&word={{ word }}" method="get">
-        <label for="language">Select Language:</label>
-        <select name="language" id="language">
-            <option value="arabic">Arabic</option>
-            <option value="urdu">Urdu</option>
-            <option value="eng">English</option>
-        </select>
-        <br>
-        <label for="word">Enter Word:</label>
-        <input type="text" id="word" name="word">
-        <br>
+        <div class="form-group">
+            <label for="language">Select Language:</label>
+            <select name="language" id="language">
+                <option value="arabic">Arabic</option>
+                <option value="urdu">Urdu</option>
+                <option value="eng">English</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="word">Enter Word:</label>
+            <input type="text" id="word" name="word">
+        </div>
         <input type="submit" value="Search">
     </form>
 </body>
