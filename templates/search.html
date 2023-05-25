@@ -5,9 +5,9 @@
 </head>
 <body>
     <h1>Search Results</h1>
-    <h2>Search Word: {{ word }}</h2>
-    <h2>Occurrences: {{ results[0] }}</h2>
-    <h2>% of Holy Quran covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
+    <h2>Searched Word: {{ word }}</h2>
+    <h2>Total No Of Occurrences: {{ results[0] }}</h2>
+    <h2>Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
     <hr>
     {% for result in results[1:] %}
         <form>
