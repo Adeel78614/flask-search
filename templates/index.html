@@ -3,8 +3,23 @@
 <head>
     <title>Search Page</title>
     <style>
-        h1 {
-            color: blue;
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label, input, select, input[type="submit"] {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -17,10 +32,10 @@
             <option value="urdu">Urdu</option>
             <option value="eng">English</option>
         </select>
-        <br><br>
+        <br>
         <label for="word">Enter Word:</label>
         <input type="text" id="word" name="word">
-        <br><br>
+        <br>
         <input type="submit" value="Search">
     </form>
 </body>
