@@ -25,14 +25,21 @@
             align-items: center;
         }
 
-        .form-group {
+        .form-row {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
 
-        label {
+        .form-row label {
             margin-right: 10px;
+            width: 120px;
+            text-align: right;
+        }
+
+        .form-row select,
+        .form-row input[type="text"] {
+            width: 200px;
         }
 
         input[type="submit"] {
@@ -43,7 +50,7 @@
 <body>
     <h1>Holy Quran Search Engine</h1>
     <form action="/search?language={{ language }}&word={{ word }}" method="get">
-        <div class="form-group">
+        <div class="form-row">
             <label for="language">Select Language:</label>
             <select name="language" id="language">
                 <option value="arabic">Arabic</option>
@@ -51,7 +58,7 @@
                 <option value="eng">English</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-row">
             <label for="word">Enter Word:</label>
             <input type="text" id="word" name="word">
         </div>
