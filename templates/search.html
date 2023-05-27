@@ -35,8 +35,8 @@
             <h2><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h2>
             <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
             <label>Arabic:</label><label for="arabic-checkbox" style="color: #e69900;"> <strong>{{ result.Arabic }}</strong></label><br>
-            <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">Urdu:
-            Urdu:<label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
+            <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
+            <label>Urdu:</label><label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
 
             <input type="checkbox" name="selected_data" value="wbw_urdu" id="wbw_urdu-checkbox">
             <label for="wbw_urdu-checkbox">
@@ -52,7 +52,7 @@
             </label><br>
 
             <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
-            English:<label for="eng-checkbox" style="color:  #b300b3;">{{ result.Eng }}</label><br>
+            <label>English:</label><label for="eng-checkbox" style="color:  #b300b3;">{{ result.Eng }}</label><br>
 
             <input type="checkbox" name="selected_data" value="wbw_eng" id="wbw_eng-checkbox">
             <label for="wbw_eng-checkbox">
@@ -68,7 +68,7 @@
             </label><br>
 
             <input type="checkbox" name="selected_data" value="tafseer" id="tafseer-checkbox">
-            Tafseer:<label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
+            <label>Tafseer:</label><label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
         </form>
         <hr>
     {% endfor %}
