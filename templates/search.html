@@ -79,14 +79,16 @@
             <h1><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
 
             {% if result.lang == "arabic" %}
+                <label id="arabic-label" class="arabic">Arabic:</label>
                 <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
-                <label id="arabic-label" class="arabic">Arabic:</label><label for="arabic-checkbox" style="color: #e69900; font-size: 40px;"> <strong>{{ result.Arabic }}</strong></label><br>
+                <label for="arabic-checkbox" style="color: #e69900; font-size: 40px;"> <strong>{{ result.Arabic }}</strong></label><br>
                 <script>highlightSearchWord("arabic");</script>
             {% endif %}
 
             {% if result.lang == "urdu" %}
+                <label id="urdu-label" class="urdu">Urdu:</label>
                 <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
-                <label id="urdu-label" class="urdu">Urdu:</label><label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
+                <label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
                 <script>highlightSearchWord("urdu");</script>
             {% endif %}
 
@@ -104,8 +106,9 @@
             </label><br>
 
             {% if result.lang == "eng" %}
+                <label id="eng-label" class="english">English:</label>
                 <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
-                <label id="eng-label" class="english">English:</label><label for="eng-checkbox" style="color: #b300b3;">{{ result.Eng }}</label><br>
+                <label for="eng-checkbox" style="color: #b300b3;">{{ result.Eng }}</label><br>
                 <script>highlightSearchWord("eng");</script>
             {% endif %}
 
