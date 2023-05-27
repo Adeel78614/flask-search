@@ -38,22 +38,16 @@
     <script>
         function highlightSearchWord(lang) {
             var word = "{{ word }}";
+            var elements = document.getElementsByClassName(lang);
 
-            if (lang === "arabic") {
-                var arabicLabel = document.getElementById("arabic-label");
-                var arabicText = arabicLabel.textContent;
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                var text = element.innerHTML;
 
-                arabicLabel.innerHTML = arabicText.replace(word, '<span class="highlight">' + word + '</span>');
-            } else if (lang === "urdu") {
-                var urduLabel = document.getElementById("urdu-label");
-                var urduText = urduLabel.textContent;
-
-                urduLabel.innerHTML = urduText.replace(word, '<span class="highlight">' + word + '</span>');
-            } else if (lang === "eng") {
-                var engLabel = document.getElementById("eng-label");
-                var engText = engLabel.textContent;
-
-                engLabel.innerHTML = engText.replace(word, '<span class="highlight">' + word + '</span>');
+                element.innerHTML = text.replace(
+                    new RegExp(word, 'gi'),
+                    '<span class="highlight">' + word + '</span>'
+                );
             }
         }
     </script>
@@ -73,23 +67,21 @@
 
     <hr>
 
-    {% for result in results[1:] %}
-        <form>
+    <form>
+        {% for result in results[1:] %}
             <input type="hidden" name="word" value="{{ word }}">
             <h1><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
 
             {% if result.lang == "arabic" %}
-                <label id="arabic-label" class="arabic">Arabic:</label>
+                <label class="arabic">Arabic:</label>
                 <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
                 <label for="arabic-checkbox" style="color: #e69900; font-size: 40px;"> <strong>{{ result.Arabic }}</strong></label><br>
-                <script>highlightSearchWord("arabic");</script>
             {% endif %}
 
             {% if result.lang == "urdu" %}
-                <label id="urdu-label" class="urdu">Urdu:</label>
+                <label class="urdu">Urdu:</label>
                 <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
                 <label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
-                <script>highlightSearchWord("urdu");</script>
             {% endif %}
 
             <input type="checkbox" name="selected_data" value="wbw_urdu" id="wbw_urdu-checkbox">
@@ -106,10 +98,9 @@
             </label><br>
 
             {% if result.lang == "eng" %}
-                <label id="eng-label" class="english">English:</label>
+                <label class="english">English:</label>
                 <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
                 <label for="eng-checkbox" style="color: #b300b3;">{{ result.Eng }}</label><br>
-                <script>highlightSearchWord("eng");</script>
             {% endif %}
 
             <input type="checkbox" name="selected_data" value="wbw_eng" id="wbw_eng-checkbox">
@@ -126,10 +117,11 @@
             </label><br>
 
             <input type="checkbox" name="selected_data" value="tafseer" id="tafseer-checkbox">
-            <label>Tafseer:</label><label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
+            <label>Tafseer:</label>
+            <label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
 
             <hr>
-        </form>
-    {% endfor %}
+        {% endfor %}
+    </form>
 </body>
 </html>
