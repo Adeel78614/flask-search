@@ -3,6 +3,27 @@
 <head>
     <title>Search Results</title>
     <style>
+        
+
+        h1 {
+
+            font-size: 36px;
+
+            color: #333;
+
+            margin-bottom: 20px;
+
+        }
+
+        h2 {
+
+            font-size: 24px;
+
+            color: #666;
+
+            margin-bottom: 10px;
+
+        }
             form {
             font-size: 18px;
         }
@@ -24,11 +45,16 @@
     </style>
 </head>
 <body>
-    <h1>Search Results</h1>
-    <h2>Searched Word: {{ word }}</h2>
-    <h2>Total No Of Occurrences: {{ results[0] }}</h2>
-    <h2>Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
+      <h1 style="text-align: center;">Search Results</h1>
+
+    <h2 style="text-align: center;">Searched Word: {{ word }}</h2>
+
+    <h2 style="text-align: center;">Total No Of Occurrences: {{ results[0] }}</h2>
+
+    <h2 style="text-align: center;">Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
+
     <hr>
+    
     {% for result in results[1:] %}
         <form>
             <input type="hidden" name="word" value="{{ word }}">
