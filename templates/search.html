@@ -3,75 +3,92 @@
 <head>
     <title>Search Results</title>
     <style>
-        
-
         h1 {
-
             font-size: 36px;
-
             color: #333;
-
             margin-bottom: 20px;
-
         }
 
         h2 {
-
             font-size: 24px;
-
             color: blue;
-
             margin-bottom: 10px;
-
+            background-color: lightblue;
+            padding: 5px;
         }
+
         h3 {
-
             font-size: 24px;
-
             color: red;
-
             margin-bottom: 10px;
-
-        }        
-            form {
-            font-size: 18px;
+            background-color: lightblue;
+            padding: 5px;
         }
 
         label {
             font-size: 34px;
         }
 
-        label span {
-            /* Your existing styles */
+        .highlight {
+            background-color: yellow;
         }
 
-        hr {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border: 0;
-            border-top: 1px solid #ddd;
-        }
+        /* Rest of your styles */
     </style>
+    <script>
+        function highlightSearchWord(lang) {
+            var word = "{{ word }}";
+
+            if (lang === "arabic") {
+                var arabicLabel = document.getElementById("arabic-label");
+                var arabicText = arabicLabel.textContent;
+
+                arabicLabel.innerHTML = arabicText.replace(word, '<span class="highlight">' + word + '</span>');
+            } else if (lang === "urdu") {
+                var urduLabel = document.getElementById("urdu-label");
+                var urduText = urduLabel.textContent;
+
+                urduLabel.innerHTML = urduText.replace(word, '<span class="highlight">' + word + '</span>');
+            } else if (lang === "eng") {
+                var engLabel = document.getElementById("eng-label");
+                var engText = engLabel.textContent;
+
+                engLabel.innerHTML = engText.replace(word, '<span class="highlight">' + word + '</span>');
+            }
+        }
+    </script>
 </head>
 <body>
-      <h1 style="text-align: center;">Search Results</h1>
+    <h1 style="text-align: center;">Search Results</h1>
 
     <h2 style="text-align: center;">Searched Word: {{ word }}</h2>
 
-    <h2 style="text-align: center;">Total No Of Occurrences: {{ results[0] }}</h2>
+    <h2 style="text-align: center; background-color: lightblue; padding: 5px;">
+        Total No Of Occurrences: {{ results[0] }}
+    </h2>
 
-    <h3 style="text-align: center;">Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h3>
+    <h3 style="text-align: center; background-color: lightblue; padding: 5px;">
+        Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%
+    </h3>
 
     <hr>
-    
+
     {% for result in results[1:] %}
         <form>
             <input type="hidden" name="word" value="{{ word }}">
             <h1><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
-            <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
-            <label>Arabic:</label><label for="arabic-checkbox" style="color: #e69900; font-size: 40px;"> <strong>{{ result.Arabic }}</strong></label><br>
-            <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
-            <label>Urdu:</label><label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
+
+            {% if result.lang == "arabic" %}
+                <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
+                <label id="arabic-label" class="arabic">Arabic:</label><label for="arabic-checkbox" style="color: #e69900; font-size: 40px;"> <strong>{{ result.Arabic }}</strong></label><br>
+                <script>highlightSearchWord("arabic");</script>
+            {% endif %}
+
+            {% if result.lang == "urdu" %}
+                <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
+                <label id="urdu-label" class="urdu">Urdu:</label><label for="urdu-checkbox" style="color: #0040ff;"> {{ result.Urdu }}</label><br>
+                <script>highlightSearchWord("urdu");</script>
+            {% endif %}
 
             <input type="checkbox" name="selected_data" value="wbw_urdu" id="wbw_urdu-checkbox">
             <label for="wbw_urdu-checkbox">
@@ -86,8 +103,11 @@
                 {% endfor %}
             </label><br>
 
-            <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
-            <label>English:</label><label for="eng-checkbox" style="color:  #b300b3;">{{ result.Eng }}</label><br>
+            {% if result.lang == "eng" %}
+                <input type="checkbox" name="selected_data" value="eng" id="eng-checkbox">
+                <label id="eng-label" class="english">English:</label><label for="eng-checkbox" style="color: #b300b3;">{{ result.Eng }}</label><br>
+                <script>highlightSearchWord("eng");</script>
+            {% endif %}
 
             <input type="checkbox" name="selected_data" value="wbw_eng" id="wbw_eng-checkbox">
             <label for="wbw_eng-checkbox">
@@ -96,7 +116,7 @@
                     {% if loop.index % 2 == 0 %}
                         <span style="color: #ff4dff;">{{ segment }}</span>
                     {% else %}
-                        <span style="color:  #b300b3;">{{ segment }}</span>
+                        <span style="color: #b300b3;">{{ segment }}</span>
                     {% endif %}
                     {% if not loop.last %}|{% endif %}
                 {% endfor %}
@@ -104,8 +124,9 @@
 
             <input type="checkbox" name="selected_data" value="tafseer" id="tafseer-checkbox">
             <label>Tafseer:</label><label for="tafseer-checkbox" style="color: #00b33c;"> {{ result.Tafseer }}</label><br>
+
+            <hr>
         </form>
-        <hr>
     {% endfor %}
 </body>
 </html>
