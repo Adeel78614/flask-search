@@ -67,7 +67,7 @@
     {% for result in results[1:] %}
         <form>
             <input type="hidden" name="word" value="{{ word }}">
-            <h>1<input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
+            <h1><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
             <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
             <label>Arabic:</label><label for="arabic-checkbox" style="color: #e69900;"> <strong>{{ result.Arabic }}</strong></label><br>
             <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
