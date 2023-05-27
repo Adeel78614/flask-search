@@ -19,17 +19,26 @@
 
             font-size: 24px;
 
-            color: #666;
+            color: blue;
 
             margin-bottom: 10px;
 
         }
+        h3 {
+
+            font-size: 24px;
+
+            color: red;
+
+            margin-bottom: 10px;
+
+        }        
             form {
             font-size: 18px;
         }
 
         label {
-            font-size: 28px;
+            font-size: 34px;
         }
 
         label span {
@@ -51,14 +60,14 @@
 
     <h2 style="text-align: center;">Total No Of Occurrences: {{ results[0] }}</h2>
 
-    <h2 style="text-align: center;">Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h2>
+    <h3 style="text-align: center;">Percentage Of Holy Quran Covered: {{ (results[0] / 77430 * 100) | round(2) }}%</h3>
 
     <hr>
     
     {% for result in results[1:] %}
         <form>
             <input type="hidden" name="word" value="{{ word }}">
-            <h2><input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h2>
+            <h>1<input type="checkbox" name="selected_verse_no" value="verse_no">Verse_no: {{ result.verse_no }}<br></h1>
             <input type="checkbox" name="selected_data" value="arabic" id="arabic-checkbox">
             <label>Arabic:</label><label for="arabic-checkbox" style="color: #e69900;"> <strong>{{ result.Arabic }}</strong></label><br>
             <input type="checkbox" name="selected_data" value="urdu" id="urdu-checkbox">
