@@ -2,6 +2,7 @@
 from flask import Flask,jsonify
 import json
 from flask import Flask, render_template, request
+import sqlite3
 
 #Opening and formating file so we can access it accordingly
 
@@ -147,6 +148,9 @@ for key, value in result2.items():
         result2[key] = 'NO DATA'
 
 
+
+# Create a cursor object to interact with the database
+
 app = Flask(__name__)
 
 
@@ -163,7 +167,7 @@ def search(search_word=None, language=None):
         search_word = request.args.get('word')
 
     # Check if language is valid
-    if language not in ['arabic', 'urdu', 'eng']:
+    if language not in ['arabic', 'urdu', 'eng','eng_transliteration']:
         return render_template('search.html', results=[{'Content': 'Invalid language selected'}])
 
 
@@ -179,14 +183,21 @@ def search(search_word=None, language=None):
                 arabic = res.get(a1)
                 urdu = res1.get(a1)
                 eng = res2.get(a1)
+                surah, ayah = a1.split(":")
+                conn = sqlite3.connect('tafseer.db')
+                cursor = conn.cursor()
+                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                result = cursor.fetchone()
+
+                
+                tafseer = result[0]
+                
                 if result1.get(a1) != None:
                     wbw_urdu = result1.get(a1)
                     wbw_eng = result2.get(a1)
-                    tafseer = res3.get(a1)
                 else:
                     wbw_urdu = "No Data"
-                    wbw_eng = "No Data"
-                    tafseer = "No Data"                
+                    wbw_eng = "No Data"              
                 result = {
                     "verse_no": verse_no,
                     "Arabic": arabic,
@@ -219,14 +230,21 @@ def search(search_word=None, language=None):
                 arabic = res.get(a1)
                 urdu = res1.get(a1)
                 eng = res2.get(a1)
+                surah, ayah = a1.split(":")
+                conn = sqlite3.connect('tafseer.db')
+                cursor = conn.cursor()
+                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                result = cursor.fetchone()
+
+                
+                tafseer = result[0]
+                
                 if result1.get(a1) != None:
                     wbw_urdu = result1.get(a1)
                     wbw_eng = result2.get(a1)
-                    tafseer = res3.get(a1)
                 else:
                     wbw_urdu = "No Data"
                     wbw_eng = "No Data"
-                    tafseer = "No Data"
                 
                 result = {
                     "verse_no": verse_no,
@@ -259,14 +277,21 @@ def search(search_word=None, language=None):
                 arabic = res.get(a1)
                 urdu = res1.get(a1)
                 eng = res2.get(a1)
+                surah, ayah = a1.split(":")
+                conn = sqlite3.connect('tafseer.db')
+                cursor = conn.cursor()
+                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                result = cursor.fetchone()
+
+                
+                tafseer = result[0]
+                
                 if result1.get(a1) != None:
                     wbw_urdu = result1.get(a1)
                     wbw_eng = result2.get(a1)
-                    tafseer = res3.get(a1)
                 else:
                     wbw_urdu = "No Data"
                     wbw_eng = "No Data"
-                    tafseer = "No Data"
                 
                 result = {
                     "verse_no": verse_no,
@@ -287,6 +312,64 @@ def search(search_word=None, language=None):
         if count < 1:
             pass
 
+    elif language == "eng_transliteration":
+        results = []
+        count = 0
+        c = 0
+        connection = sqlite3.connect('engtranslit.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT sura, ayah,text FROM verses WHERE text LIKE ?", ('%' + search_word + '%',))
+        rows = cursor.fetchall()
+        
+
+        if len(rows)>0:
+            for row in rows:
+                a1 = str(row[0]) + ':' + str(row[1])
+                verse_no = a1
+                arabic = res.get(a1)
+                urdu = res1.get(a1)
+                eng = res2.get(a1)
+                surah, ayah = a1.split(":")
+                conn = sqlite3.connect('tafseer.db')
+                cursor = conn.cursor()
+                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                result = cursor.fetchone()
+
+                
+                tafseer = result[0]
+                
+                if result1.get(a1) != None:
+                    wbw_urdu = result1.get(a1)
+                    wbw_eng = result2.get(a1)
+                else:
+                    wbw_urdu = "No Data"
+                    wbw_eng = "No Data"
+                
+                result = {
+                    "verse_no": verse_no,
+                    "Arabic": arabic,
+                    "Urdu": urdu,
+                    "Wbw_Urdu": wbw_urdu,
+                    "Eng": eng,
+                    "Wbw_Eng": wbw_eng,
+                    "Tafseer": tafseer,
+                }
+                results.append(result)
+                c1=res2.get(a1)
+                c2=c1.count(search_word)
+                count += 1
+                c += c2
+
+        total_occurrences = 0
+        for row in rows:
+            text = row[2]
+            occurrences_in_row = text.count(search_word)
+            total_occurrences += occurrences_in_row
+        results.insert(0,total_occurrences )
+
+        if count < 1:
+            pass
+
     else:
         results = []
         results.append({
@@ -297,7 +380,6 @@ def search(search_word=None, language=None):
 
 if __name__ == '__main__':
     app.run()
-
 
 
 
