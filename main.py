@@ -360,7 +360,7 @@ def search(search_word=None, language=None):
                 count += 1
                 c += c2
 
-        total_occurrences = 1
+        total_occurrences = 0
         for row in rows:
             text = row[2]
             occurrences_in_row = text.count(search_word)
