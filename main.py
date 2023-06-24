@@ -294,10 +294,13 @@ def search(search_word=None, language=None):
             if 2>1:
                # print(j)
                 clean=re.sub(r'[^a-zA-Z0-9\s]', '', t)
+                new=[]
                # print(clean)
                 i = clean.split()
                 #print(i)
-                if search_word in i:
+                for j in i:
+                    new.append(j.lower())
+                if search_word.lower() in new:
                     a1 = list(res2.keys())[list(res2.values()).index(t)]
                     check.append(a1)
                     verse_no = a1
@@ -334,14 +337,15 @@ def search(search_word=None, language=None):
                     }
                     results.append(result)
                     c1=res2.get(a1)
-                    c2=c1.count(search_word)
+                    c2=c1.lower().count(search_word.lower())
                     count += 1
                     c+=c2
                     exact+=c2
                     
 
         for i in res2.values():
-            if search_word in i:
+
+            if search_word.lower() in i.lower():
                 a1 = list(res2.keys())[list(res2.values()).index(i)]
                 if a1 not in check:
                     verse_no = a1
@@ -377,7 +381,7 @@ def search(search_word=None, language=None):
                     }
                     results.append((result))
                     c1=res2.get(a1)
-                    c2=c1.count(search_word)
+                    c2=c1.lower().count(search_word.lower())
                     count += 1
                     c += c2
                     partial+=c2
