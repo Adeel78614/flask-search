@@ -175,46 +175,106 @@ def search(search_word=None, language=None):
         results = []
         count = 0
         c = 0
+        check=[]
+        partial=0
+        exact=0        
+
+        for t in res.values():
+            #print(t)
+            
+            if 2>1:
+               # print(j)
+                
+               # print(clean)
+                i = t.split()
+                #print(i)
+                if search_word in i:
+                    a1 = list(res.keys())[list(res.values()).index(t)]
+                    check.append(a1)
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
+
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                        #print(wbw_urdu)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append(result)
+                    c1=res.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c+=c2
+                    exact+=c2
+                    
 
         for i in res.values():
             if search_word in i:
                 a1 = list(res.keys())[list(res.values()).index(i)]
-                verse_no = a1
-                arabic = res.get(a1)
-                urdu = res1.get(a1)
-                eng = res2.get(a1)
-                surah, ayah = a1.split(":")
-                conn = sqlite3.connect('tafseer.db')
-                cursor = conn.cursor()
-                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
-                result = cursor.fetchone()
+                if a1 not in check:
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
 
-                
-                tafseer = result[0]
-                arabic_tafseer=res3.get(a1)
-                
-                if result1.get(a1) != None:
-                    wbw_urdu = result1.get(a1)
-                    wbw_eng = result2.get(a1)
-                else:
-                    wbw_urdu = "No Data"
-                    wbw_eng = "No Data"              
-                result = {
-                    "verse_no": verse_no,
-                    "Arabic": arabic,
-                    "Urdu": urdu,
-                    "Wbw_Urdu": wbw_urdu,
-                    "Eng": eng,
-                    "Wbw_Eng": wbw_eng,
-                    "Tafseer": tafseer,
-                    "Arabic_Tafseer": arabic_tafseer,
-                }   
-                results.append(result)
-                c1=res.get(a1)
-                c2=c1.count(search_word)
-                count += 1
-                c += c2
-        results.insert(0, c)
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append((result))
+                    c1=res.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c += c2
+                    partial+=c2
+        add=[c,exact,partial]
+        results.insert(0,add)                
+   
 
         if count < 1:
             pass
@@ -223,48 +283,109 @@ def search(search_word=None, language=None):
         results = []
         count = 0
         c = 0
+        check=[]
+        partial=0
+        exact=0
         
+
+        for t in res2.values():
+            #print(t)
+            
+            if 2>1:
+               # print(j)
+                clean=re.sub(r'[^a-zA-Z0-9\s]', '', t)
+               # print(clean)
+                i = clean.split()
+                #print(i)
+                if search_word in i:
+                    a1 = list(res2.keys())[list(res2.values()).index(t)]
+                    check.append(a1)
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
+
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                        #print(wbw_urdu)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append(result)
+                    c1=res2.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c+=c2
+                    exact+=c2
+                    
 
         for i in res2.values():
             if search_word in i:
                 a1 = list(res2.keys())[list(res2.values()).index(i)]
-                verse_no = a1
-                arabic = res.get(a1)
-                urdu = res1.get(a1)
-                eng = res2.get(a1)
-                surah, ayah = a1.split(":")
-                conn = sqlite3.connect('tafseer.db')
-                cursor = conn.cursor()
-                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
-                result = cursor.fetchone()
+                if a1 not in check:
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
 
-                
-                tafseer = result[0]
-                arabic_tafseer=(res3.get(a1))
-                
-                if result1.get(a1) != None:
-                    wbw_urdu = result1.get(a1)
-                    wbw_eng = result2.get(a1)
-                else:
-                    wbw_urdu = "No Data"
-                    wbw_eng = "No Data"
-                
-                result = {
-                    "verse_no": verse_no,
-                    "Arabic": arabic,
-                    "Urdu": urdu,
-                    "Wbw_Urdu": wbw_urdu,
-                    "Eng": eng,
-                    "Wbw_Eng": wbw_eng,
-                    "Tafseer": tafseer,
-                    "Arabic_Tafseer": arabic_tafseer,
-                }
-                results.append(result)
-                c1=res2.get(a1)
-                c2=c1.count(search_word)
-                count += 1
-                c += c2
-        results.insert(0, c)
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append((result))
+                    c1=res2.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c += c2
+                    partial+=c2
+ 
+        add=[c,exact,partial]
+        results.insert(0,add)
+        #results[1]=partial
+        #results.append(partial)
 
         if count < 1:
             pass
@@ -273,48 +394,107 @@ def search(search_word=None, language=None):
         results = []
         count = 0
         c = 0
+        check=[]
+        partial=0
+        exact=0
+        
+
+        for t in res1.values():
+            #print(t)
+            
+            if 2>1:
+               # print(j)
+                
+               # print(clean)
+                i = t.split()
+                #print(i)
+                if search_word in i:
+                    a1 = list(res1.keys())[list(res1.values()).index(t)]
+                    check.append(a1)
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
+
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                        #print(wbw_urdu)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append(result)
+                    c1=res1.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c+=c2
+                    exact+=c2
+                    
 
         for i in res1.values():
             if search_word in i:
                 a1 = list(res1.keys())[list(res1.values()).index(i)]
-                verse_no = a1
-                arabic = res.get(a1)
-                urdu = res1.get(a1)
-                eng = res2.get(a1)
-                surah, ayah = a1.split(":")
-                conn = sqlite3.connect('tafseer.db')
-                cursor = conn.cursor()
-                cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
-                result = cursor.fetchone()
+                if a1 not in check:
+                    verse_no = a1
+                    arabic = res.get(a1)
+                    urdu = res1.get(a1)
+                    eng = res2.get(a1)
+                    surah, ayah = a1.split(":")
+                    conn = sqlite3.connect('tafseer.db')
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT text FROM verses WHERE sura=? AND ayah=?", (int(surah), int(ayah)))
+                    result = cursor.fetchone()
 
+                    
+                    tafseer = result[0]
+                    arabic_tafseer=(res3.get(a1))
+                    
+                    if result1.get(a1) != None:
+                        wbw_urdu = result1.get(a1)
+                        wbw_eng = result2.get(a1)
+                    else:
+                        wbw_urdu = "No Data"
+                        wbw_eng = "No Data"
+                    
+                    result = {
+                        "verse_no": verse_no,
+                        "Arabic": arabic,
+                        "Urdu": urdu,
+                        "Wbw_Urdu": wbw_urdu,
+                        "Eng": eng,
+                        "Wbw_Eng": wbw_eng,
+                        "Tafseer": tafseer,
+                        "Arabic_Tafseer": arabic_tafseer,
+                    }
+                    results.append((result))
+                    c1=res1.get(a1)
+                    c2=c1.count(search_word)
+                    count += 1
+                    c += c2
+                    partial+=c2
                 
-                tafseer = result[0]
-                
-                arabic_tafseer=(res3.get(a1))
-                
-                if result1.get(a1) != None:
-                    wbw_urdu = result1.get(a1)
-                    wbw_eng = result2.get(a1)
-                else:
-                    wbw_urdu = "No Data"
-                    wbw_eng = "No Data"
-                
-                result = {
-                    "verse_no": verse_no,
-                    "Arabic": arabic,
-                    "Urdu": urdu,
-                    "Wbw_Urdu": wbw_urdu,
-                    "Eng": eng,
-                    "Wbw_Eng": wbw_eng,
-                    "Tafseer": tafseer,
-                    "Arabic_Tafseer": arabic_tafseer,
-                }
-                results.append(result)
-                c1=res1.get(a1)
-                c2=c1.count(search_word)
-                count += 1
-                c += c2
-        results.insert(0, c)
+        add=[c,exact,partial]
+        results.insert(0,add)
 
         if count < 1:
             pass
@@ -375,7 +555,8 @@ def search(search_word=None, language=None):
             text = row[2]
             occurrences_in_row = text.count(search_word)
             total_occurrences += occurrences_in_row
-        results.insert(0,total_occurrences )
+        add=[total_occurrences,0,0]
+        results.insert(0,add )
 
         if count < 1:
             pass
@@ -390,6 +571,5 @@ def search(search_word=None, language=None):
 
 if __name__ == '__main__':
     app.run()
-
 
 
