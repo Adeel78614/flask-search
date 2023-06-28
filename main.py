@@ -203,7 +203,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -247,7 +247,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -315,7 +315,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -360,7 +360,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -427,7 +427,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -471,7 +471,7 @@ def search(search_word=None, language=None):
 
                     
                     tafseer = result[0]
-                    arabic_tafseer=(res3.get(a1))
+                    arabic_tafseer=(res3.get(a1))[0]
                     
                     if result1.get(a1) != None:
                         wbw_urdu = result1.get(a1)
@@ -529,7 +529,7 @@ def search(search_word=None, language=None):
                 
                 tafseer = result[0]
                 
-                arabic_tafseer=(res3.get(a1))
+                arabic_tafseer=(res3.get(a1))[0]
                 
                 if result1.get(a1) != None:
                     wbw_urdu = result1.get(a1)
